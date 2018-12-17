@@ -28,21 +28,37 @@ debug:
 
 compile: $(OBJS)
 	@echo "LD   $(KERNEL)"
-	${CROSS_COMPILE}gcc ${LDFLAG}
+ifeq (${ARCH},i386)
+	i686-elf-gcc ${LDFLAG}
+else
+	gcc ${LDFLAG}
+endif
 	mv ${OBJS} ${BINDIR}/objs
 	mv ${KERNEL} ${BINDIR}
 
 %.o: %.c
 	@echo "CC   $<"
-	${CROSS_COMPILE}gcc ${CFLAG} ${INCDIR} -c $< -o $@
+ifeq (${ARCH},i386)
+	i686-elf-gcc ${CFLAG} ${INCDIR} -c $< -o $@
+else
+	gcc ${CFLAG} ${INCDIR} -c $< -o $@
+endif
 
 %.o: %.s
 	@echo "AS   $<"
-	${CROSS_COMPILE}as $< -o $@
+ifeq (${ARCH},i386)
+	i686-elf-as $< -o $@
+else
+	as $< -o $@
+endif
 
 %.o: %.S
 	@echo "AS   $<"
-	${CROSS_COMPILE}as $< -o $@
+ifeq (${ARCH},i386)
+	i686-elf-as $< -o $@
+else
+	as $< -o $@
+endif
 
 %.o: %.asm
 	@echo "AS   $<"
