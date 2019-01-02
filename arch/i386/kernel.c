@@ -34,25 +34,25 @@ elf_t kernel_elf;
 
 void init(unsigned long magic, multiboot_info_t *mbi, unsigned int initial_boot_stack)
 {
-	x86_initial_esp = initial_boot_stack;
-	*mb = *mbi;
-	if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
+	//x86_initial_esp = initial_boot_stack;
+	//*mb = *mbi;
+	/*if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
 	{
 		__asm__ __volatile__ ("cli");
 		__asm__ __volatile__ ("hlt");
 		return;
-	}
+	}*/
 
-	x86_initrd_start = *(uint32_t*)(mbi->mods_addr);
-	x86_initrd_end = *(uint32_t*)(mbi->mods_addr+4);
-	x86_initrd_size = x86_initrd_end - x86_initrd_start;
+	//x86_initrd_start = *(uint32_t*)(mbi->mods_addr);
+	//x86_initrd_end = *(uint32_t*)(mbi->mods_addr+4);
+	//x86_initrd_size = x86_initrd_end - x86_initrd_start;
 
-    multiboot_memory_map_t* mmap = mbi->mmap_addr;
-    x86_ramsize = mbi->mem_upper / 1024 + 2;
+    //multiboot_memory_map_t* mmap = mbi->mmap_addr;
+    //x86_ramsize = mbi->mem_upper / 1024 + 2;
 
     init_text_mode();
 
-    while(mmap < mbi->mmap_addr + mbi->mmap_length)
+    /*while(mmap < mbi->mmap_addr + mbi->mmap_length)
     {
 		if(mmap->type == MULTIBOOT_MEMORY_AVAILABLE && mmap->len > 0x100000)
 		{
@@ -67,16 +67,16 @@ void init(unsigned long magic, multiboot_info_t *mbi, unsigned int initial_boot_
 
     x86_ramstart = x86_memory_location;
     x86_memory_end_location = x86_memory_location + x86_memory_amount;
-    x86_usable_mem = x86_memory_end_location - x86_memory_location;
+    x86_usable_mem = x86_memory_end_location - x86_memory_location;*/
     
     // Second method for getting total usable memory
     //			  Bytes             KiB    MiB
     // We add up 2 MiB to round up the memory calculation
-    x86_ramsize = (x86_usable_mem / 1024 / 1024) + 2;
+    /*x86_ramsize = (x86_usable_mem / 1024 / 1024) + 2;
     
     x86_total_frames = x86_usable_mem / 0x1000;
 
-    kernel_elf = elf_from_multiboot(mbi);
+    kernel_elf = elf_from_multiboot(mbi);*/
 
     // GRUB enables A20 for us
 	init_a20();	
@@ -84,11 +84,11 @@ void init(unsigned long magic, multiboot_info_t *mbi, unsigned int initial_boot_
 	init_idt();
 	setup_sse();
 	pit_init();
-	initialize_paging(x86_total_frames, 0, 0);
-	malloc_stats();
+	//initialize_paging(x86_total_frames, 0, 0);
+	//malloc_stats();
 	init_8042_keyboard();
 
- 	if (mbi->mods_count > 0)
+ 	/*if (mbi->mods_count > 0)
 	{
 		modules_exist = true;
 		uint32_t x86_initrd_location = x86_initrd_start;
@@ -97,7 +97,7 @@ void init(unsigned long magic, multiboot_info_t *mbi, unsigned int initial_boot_
 	else
 	{
 		printk("No Modules Found!\n");
-	}
+	}*/
 
 	shell();
 

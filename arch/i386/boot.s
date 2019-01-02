@@ -1,15 +1,16 @@
-.set ALIGN,    1<<0
-.set MEMINFO,  1<<1
-.set FLAGS,    ALIGN | MEMINFO
-.set MAGIC,    0x1BADB002
-.set CHECKSUM, -(MAGIC + FLAGS)
-
+.code64
 .section .multiboot
-.align 4
-.long MAGIC
-.long FLAGS
-.long CHECKSUM
+header_start:
+	.long 0xe85250d6
+	.long 0
+	.long header_end - header_start
+	.long 0x100000000 - (0xe85250d6 + 0 + (header_end - header_start))
+	.word 0x00
+	.word 0x00
+	.long 0x08
+header_end:
 
+.code32
 .section .bootstrap_stack, "aw", @nobits
   stack_bottom:
   .skip 16384

@@ -92,8 +92,8 @@ iso:
 	-@printf "Welcome to Cobalt!\0" > motd.txt
 	-@./make_initrd version.txt version.txt motd.txt motd.txt
 	-@mv initrd.img iso/boot/initrd.img
-	@echo "ISO  ${IMAGE}"
-	-@grub-mkrescue -o ${IMAGE} ${IMAGEDIR} 2>/dev/null || true
+	-@echo "ISO  ${IMAGE}"
+	-@grub-mkrescue -o ${IMAGE} ${IMAGEDIR} --grub2-boot-info 2>/dev/null || true
 
 run:
 	qemu-system-${ARCH} -cdrom kernel.iso
