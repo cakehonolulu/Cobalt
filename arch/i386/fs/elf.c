@@ -1,13 +1,13 @@
 #include <i386/elf.h>
 #include <types.h>
 
-elf_t elf_from_multiboot (struct multiboot_info *mb)
+elf_t elf_from_multiboot (struct multiboot_tag_elf_sections *tag)
 {
   elf_t elf;
-  elf_section_header_t *sh = (elf_section_header_t*)mb->u.elf_sec.addr;
+  elf_section_header_t *sh = (elf_section_header_t*)(tag->sections);
 
-  uint32_t shstrtab = sh[mb->u.elf_sec.shndx].addr;
-  for (int i = 0; i < mb->u.elf_sec.num; i++) {
+  uint32_t shstrtab = sh[tag->shndx].addr;
+  for (int i = 0; i < tag->num; i++) {
     const char *name = (const char *) (shstrtab + sh[i].name);
     if (!strcmp (name, ".strtab")) {
       elf.strtab = (const char *)sh[i].addr;

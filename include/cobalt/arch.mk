@@ -6,6 +6,7 @@ set timeout=0\n\
 set default=0\n\
 menuentry "Cobalt" {\n\
 \tmultiboot2 /boot/kernel.elf\n\
+\tmodule2 /boot/initrd.img initrd\n\
 \tboot\n\
 }'
 endif

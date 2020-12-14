@@ -1,5 +1,4 @@
 #include <i386/gfx.h>
-#include <multiboot.h>
 
 extern unsigned char g_320x200x256[];
 extern unsigned char g_720x480x16[];

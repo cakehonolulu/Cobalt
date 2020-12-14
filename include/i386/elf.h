@@ -1,4 +1,4 @@
-#include <multiboot.h>
+#include <multiboot2.h>
 #include <stdint.h>
 
 #define ELF32_ST_TYPE(i) ((i)&0xf)
@@ -36,7 +36,7 @@ typedef struct
 } elf_t;
 
 // Takes a multiboot structure and returns an elf structure containing the symbol information.
-elf_t elf_from_multiboot (struct multiboot_info *mb);
+elf_t elf_from_multiboot (struct multiboot_tag_elf_sections *tag);
 
 // Looks up a symbol by address.
 const char *elf_lookup_symbol (uint32_t addr, elf_t *elf);
