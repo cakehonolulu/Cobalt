@@ -29,7 +29,7 @@ debug:
 compile: $(OBJS)
 	@echo "LD   $(KERNEL)"
 ifeq (${ARCH},i386)
-	i686-elf-gcc ${LDFLAG}
+	i786-elf-gcc ${LDFLAG}
 else
 	gcc ${LDFLAG}
 endif
@@ -39,7 +39,7 @@ endif
 %.o: %.c
 	@echo "CC   $<"
 ifeq (${ARCH},i386)
-	i686-elf-gcc ${CFLAG} ${INCDIR} -c $< -o $@
+	i786-elf-gcc ${CFLAG} ${INCDIR} -c $< -o $@
 else
 	gcc ${CFLAG} ${INCDIR} -c $< -o $@
 endif
@@ -47,7 +47,7 @@ endif
 %.o: %.s
 	@echo "AS   $<"
 ifeq (${ARCH},i386)
-	i686-elf-as $< -o $@
+	i786-elf-as $< -o $@
 else
 	as $< -o $@
 endif
@@ -55,7 +55,7 @@ endif
 %.o: %.S
 	@echo "AS   $<"
 ifeq (${ARCH},i386)
-	i686-elf-as $< -o $@
+	i786-elf-as $< -o $@
 else
 	as $< -o $@
 endif

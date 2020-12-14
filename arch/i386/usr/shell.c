@@ -1,5 +1,4 @@
 #include <i386/vga.h>
-#include <i386/cpu.h>
 #include <i386/kheap.h>
 #include <i386/gfx.h>
 #include <i386/8042.h>
