@@ -1,6 +1,5 @@
 #include <i386/irq.h>
 #include <i386/system.h>
-#include <i386/idt.h>
 #include <i386/regs.h>
 
 void *irq_routines[16] =

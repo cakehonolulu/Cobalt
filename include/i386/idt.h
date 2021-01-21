@@ -21,12 +21,6 @@ struct idt_ptr
     uint16_t base;
 } __attribute__((packed));
 
-/* IDT structure */
-struct idt_entry idt[256];
-
-/* IDT pointer */
-struct idt_ptr idtp;
-
 /* cake: Function declared on another file
    to load our IDT table */
 extern void idt_flush();

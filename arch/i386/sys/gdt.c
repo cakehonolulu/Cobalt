@@ -1,5 +1,4 @@
 #include <i386/gdt.h>
-#include <i386/tss.h>
 #include <i386/vga.h>
 
 /* GDT structure */

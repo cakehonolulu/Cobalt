@@ -1,17 +1,12 @@
 #include <i386/isr.h>
-#include <i386/shell.h>
 #include <i386/a20.h>
 #include <i386/8042.h>
 #include <i386/8253.h>
 #include <i386/8259.h>
 #include <i386/kheap.h>
-#include <i386/gdt.h>
 #include <i386/paging.h>
-#include <i386/idt.h>
-#include <i386/irq.h>
 #include <i386/vga.h>
 #include <i386/panic.h>
-#include <i386/tss.h>
 #include <i386/gfx.h>
 #include <i386/fs.h>
 #include <i386/initrd.h>
