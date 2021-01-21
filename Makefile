@@ -85,7 +85,7 @@ clean:
 	rm -rf *.txt
 iso:
 	-@mkdir -p iso/boot/grub
-	-@echo $(CPUARCH) > iso/boot/grub/grub.cfg
+	-@printf $(CPUARCH) > iso/boot/grub/grub.cfg
 	-@cp ${BINDIR}/${KERNEL} iso/boot/${KERNEL}
 	-@gcc tools/make_initrd.c -o make_initrd
 	-@printf "Cobalt version: 1.0\0" > version.txt
@@ -93,7 +93,7 @@ iso:
 	-@./make_initrd version.txt version.txt motd.txt motd.txt
 	-@mv initrd.img iso/boot/initrd.img
 	-@echo "ISO  ${IMAGE}"
-	-@grub-mkrescue -o ${IMAGE} ${IMAGEDIR} --grub2-boot-info 2>/dev/null || true
+	-@grub-mkrescue -o ${IMAGE} ${IMAGEDIR} --grub2-boot-info
 
 run:
 	qemu-system-${ARCH} -cdrom kernel.iso

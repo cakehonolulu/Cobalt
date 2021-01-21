@@ -3,7 +3,7 @@
 #include <i386/gfx.h>
 #include <i386/8042.h>
 #include <i386/panic.h>
-#include <multiboot.h>
+#include <multiboot2.h>
 #include <string.h>
 #include <stdint.h>
 
@@ -274,8 +274,8 @@ void pci(char *args)
 void mmap(char *args)
 {
   UNUSED(args);
-  extern multiboot_info_t *mb;
-  get_memory_map(mb);
+  extern struct multiboot_tag_mmap *tag_mmap;
+  get_memory_map(tag_mmap);
 }
 
 void shell()
